@@ -13,41 +13,46 @@
 clear all
 clc
 
+% Determine the Maximum number of distinct powers:
 
+max = 99 * 99;
+count = 0;
+remain = [];
 
+% Then determine what numbers will have repeats.
 
-
-N=[];
-j=0;
-AB=[]
-for a=2:100
-    for b=2:100
-        n=a^b;
-        if n<10^16
-            if sum(n==N)==0
-                N=[N;n];
-                AB=[AB;a,b,1];
-            else
-                AB=[AB;a,b,0];
-            end
-        else
-            j=j+1;
-            AB=[AB;a,b,0];
+for a=[2:100]
+    d=0;
+    for c=[2:6]
+        if a^c <101
+            remain=[remain;a^c,a,c];
+            d=1;
         end
+    end
+    if d==0
+        count = count + 99;
     end
 end
 
-% for i=1:55
-%     if AB(i,3)==0
-%         m=1;
-%         for k=1:AB(i,2)
-%             m=AB(i,1)*m
-%             k=k+1;
-%         end
-%     end
-% end
-% 
-% 
-% 
-% 
-N=sort(N);
+x=0
+rem2=[];
+for i=[1:length(remain(:,1))]
+    a=remain(i,1);
+    b=remain(i,2);
+    c=remain(i,3);
+    newcount=0;
+    if isprime(c)==1
+        for d=[2:100]
+            if d*c <= 100
+                newcount = newcount;
+            else
+                newcount=newcount +1;
+            end
+        end
+        x=x+newcount;
+    else
+        rem2=[rem2;a,b,c]
+    end
+end
+
+count = count + x;
