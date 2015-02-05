@@ -8,28 +8,38 @@
 clear all
 clc
 format('longe')
-vec=[];
-% Start with the largest 9 digit pan digital 9876543210.
-i=9876543201;
-z=1; %toggle to kick out if not pandigital
-while isempty(vec)
-    z=1;
-    x=factor(i);
-    if length(x)>1
-        z=0;
-    end
-    x=num2str(i);
-    for j=[1:length(x)]
-        if sum((x(j)== x))>1
-            z=0;
+
+% Starting at largest possibility. Generate 7 digit pandigital vector.
+p=['7654321'];
+P=perms(p);
+VEC=[];
+% Only purpose of this loop is to remove the obvious 'not prime' values
+% such as even numbers and those ending in 5. It will reduce the test
+% vector to less than 1/2.
+for i=[1:length(P(:,1))]
+    x=str2double(P(i,7));
+    if x~=5
+        if x/2 ~= floor(x/2)
+            VEC=[VEC;P(i,:)];
         end
     end
-    if z==1 % if pass all checks, then save value
-        vec=x
-    end
-    i=i-2; % subtract 2 to avoid testing even numbers
 end
 
-% this kicks out the largest 9 digit pandigital prime. However, the problem
-% states n digit... which means n might not equal 9. So I need to think
-% about it some more...
+% Test each value for prime. I suppose I could combine the above and below.
+i=length(VEC(:,1));
+vec=[];
+while i>0
+    x=str2double(VEC(i,:));
+    if isprime(x)==1;
+        vec=[vec;x];
+    end
+    i=i-1;
+end
+
+final=num2str(max(vec))
+
+% So originally I tested 9 pandigital and there were no primes and it took 
+% several minutes to run. Then I tested 8 pandigital and there were no
+% primes but it ran in under a min. When I reduced to 7, it ran in under a 
+% second. The problem is how to solve for 9 from the beginning and not have
+% it be so slow. Might have to revisit this one after looking at solutions.
