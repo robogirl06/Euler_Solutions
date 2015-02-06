@@ -17,7 +17,7 @@ clc
 
 % The largest mulitplicand is going to be 9876/2 = 4986
 VEC=[];
-for i=[1:4938]
+for i=[2:4938]
     x=num2str(i);
     if length(x) == length(unique(x))
         % Remove all values that are not unique digits
