@@ -74,12 +74,7 @@ VEC5=[];
 for i=[1:length(VEC11(:,1))]
     for j=[1:length(VEC4(:,1))]
         if VEC11(i,2:3) == VEC4(j,1:2)
-            % So the final result must have a 0 or 5 as the value for the 
-            % 6th digit. Eliminate all values in VEC5 that don't meet that
-            % criteria.
-            if VEC11(i,1)=='0' || VEC11(i,1)=='5'
-                VEC5=[VEC5;VEC11(i,1),VEC4(j,:)];
-            end
+            VEC5=[VEC5;VEC11(i,1),VEC4(j,:)];
         end
     end
 end
@@ -241,3 +236,6 @@ end
 
 % Display Sum
 FSUM=num2str(sum(FINALSUM))
+
+% The code is repetitive. I'm sure that I could write a function to
+% simplify it. Don't know if I'll bother.
