@@ -3,10 +3,11 @@ Euler_Solutions
 
 Matlab Code for Project Euler Solutions
 
+Lets see how this looks
 
-**Lets see how this looks**
+**bold**
 
-*point 1*
+*italic*
 
 * bullet
 
